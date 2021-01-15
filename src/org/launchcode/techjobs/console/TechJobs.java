@@ -1,8 +1,6 @@
 package org.launchcode.techjobs.console;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -11,7 +9,7 @@ public class TechJobs {
 
     private static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -53,7 +51,7 @@ public class TechJobs {
 
             } else { // choice is "search"
 
-                // How does the user want to search (e.g. by skill or employer)
+                // How does the user wt to search (e.g. by skill or employer)
                 String searchField = getUserSelection("Search by:", columnChoices);
 
                 // What is their search term?
@@ -61,7 +59,8 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
+                    //System.out.println("Search all fields not yet implemented.");
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -103,7 +102,7 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
@@ -111,6 +110,27 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+        if (someJobs.size() < 1) {
+            System.out.println("No jobs found");
+        } else {
+
+            for (int a = 0; a < someJobs.size(); a++) {
+                System.out.println("*****");
+                HashMap<String, String> jobs = (HashMap<String, String>) someJobs.get(a);
+                Set<String> key = jobs.keySet();
+                Iterator it = key.iterator();
+                while (it.hasNext()) {
+                    String nextKey = (String) it.next();
+                    String nextValue = (String) jobs.get(nextKey);
+
+                    System.out.println(nextKey + ": " + nextValue);
+
+                }
+                System.out.println("*****");
+            }
+
+        }
     }
 }
+
+

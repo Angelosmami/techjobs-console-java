@@ -128,7 +128,7 @@ public class TechJobs {
                     System.out.println(nextKey + ": " + nextValue);
 
                 }
-                System.out.println("*****");
+                System.out.println("*****\n");
             }
 
         }

@@ -7,10 +7,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -43,7 +40,7 @@ public class JobData {
                 values.add(aValue);
             }
         }
-
+        Collections.sort(values);
         return values;
     }
 
@@ -87,6 +84,7 @@ public class JobData {
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
         loadData();
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
 
         for (HashMap<String, String> row : allJobs) {
             for (String aValue : row.values()) {
